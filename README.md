@@ -6,3 +6,9 @@ Tecnologias
 - Tensorflow
 - Python
 - Numpy
+
+
+## Como instalar 
+
+``` conda create --name classifier_mask --file requirements.txt ```
+

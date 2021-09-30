@@ -1,0 +1,162 @@
+[
+    {
+        "label": "tensorflow",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tensorflow",
+        "description": "tensorflow",
+        "detail": "tensorflow",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "ImageOps",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "model = tf.keras.models.load_model('models/keras_model.h5')\nmodel.summary()\n# Create the array of the right shape to feed into the keras model\n# The 'length' or number of images you can put into the array is\n# determined by the first position in the shape tuple, in this case 1.\ndata = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n# Replace this with the path to your image\nimage = Image.open('test/1/1.jpeg')\n#resize the image to a 224x224 with the same strategy as in TM2:\n#resizing the image to be at least 224x224 and then cropping from the center",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n# Replace this with the path to your image\nimage = Image.open('test/1/1.jpeg')\n#resize the image to a 224x224 with the same strategy as in TM2:\n#resizing the image to be at least 224x224 and then cropping from the center\nsize = (224, 224)\nimage = ImageOps.fit(image, size, Image.ANTIALIAS)\n#turn the image into a numpy array\nimage_array = np.asarray(image)\n# Normalize the image",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "image",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "image = Image.open('test/1/1.jpeg')\n#resize the image to a 224x224 with the same strategy as in TM2:\n#resizing the image to be at least 224x224 and then cropping from the center\nsize = (224, 224)\nimage = ImageOps.fit(image, size, Image.ANTIALIAS)\n#turn the image into a numpy array\nimage_array = np.asarray(image)\n# Normalize the image\nnormalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n# Load the image into the array",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "size",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "size = (224, 224)\nimage = ImageOps.fit(image, size, Image.ANTIALIAS)\n#turn the image into a numpy array\nimage_array = np.asarray(image)\n# Normalize the image\nnormalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n# Load the image into the array\ndata[0] = normalized_image_array\n# run the inference\npredictions = model.predict(data)",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "image",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "image = ImageOps.fit(image, size, Image.ANTIALIAS)\n#turn the image into a numpy array\nimage_array = np.asarray(image)\n# Normalize the image\nnormalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n# Load the image into the array\ndata[0] = normalized_image_array\n# run the inference\npredictions = model.predict(data)\nprint(predictions)",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "image_array",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "image_array = np.asarray(image)\n# Normalize the image\nnormalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n# Load the image into the array\ndata[0] = normalized_image_array\n# run the inference\npredictions = model.predict(data)\nprint(predictions)\npredictions = tf.nn.sigmoid(predictions)\nprint(predictions)",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "normalized_image_array",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n# Load the image into the array\ndata[0] = normalized_image_array\n# run the inference\npredictions = model.predict(data)\nprint(predictions)\npredictions = tf.nn.sigmoid(predictions)\nprint(predictions)\npercent = predictions.numpy()[0][0]\nprint(percent)",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "data[0]",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "data[0] = normalized_image_array\n# run the inference\npredictions = model.predict(data)\nprint(predictions)\npredictions = tf.nn.sigmoid(predictions)\nprint(predictions)\npercent = predictions.numpy()[0][0]\nprint(percent)\npredictions = tf.where(predictions < 0.55, 0, 1)\nprint(predictions)",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "predictions",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "predictions = model.predict(data)\nprint(predictions)\npredictions = tf.nn.sigmoid(predictions)\nprint(predictions)\npercent = predictions.numpy()[0][0]\nprint(percent)\npredictions = tf.where(predictions < 0.55, 0, 1)\nprint(predictions)\nprediction = predictions.numpy()[0][0]\nclasses = {",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "predictions",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "predictions = tf.nn.sigmoid(predictions)\nprint(predictions)\npercent = predictions.numpy()[0][0]\nprint(percent)\npredictions = tf.where(predictions < 0.55, 0, 1)\nprint(predictions)\nprediction = predictions.numpy()[0][0]\nclasses = {\n      0:'sem máscara',\n      1:'com máscara'",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "percent",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "percent = predictions.numpy()[0][0]\nprint(percent)\npredictions = tf.where(predictions < 0.55, 0, 1)\nprint(predictions)\nprediction = predictions.numpy()[0][0]\nclasses = {\n      0:'sem máscara',\n      1:'com máscara'\n  }\nprint(f\"classe: {classes[prediction]}\")",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "predictions",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "predictions = tf.where(predictions < 0.55, 0, 1)\nprint(predictions)\nprediction = predictions.numpy()[0][0]\nclasses = {\n      0:'sem máscara',\n      1:'com máscara'\n  }\nprint(f\"classe: {classes[prediction]}\")",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "prediction",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "prediction = predictions.numpy()[0][0]\nclasses = {\n      0:'sem máscara',\n      1:'com máscara'\n  }\nprint(f\"classe: {classes[prediction]}\")",
+        "detail": "predict",
+        "documentation": {}
+    },
+    {
+        "label": "classes",
+        "kind": 5,
+        "importPath": "predict",
+        "description": "predict",
+        "peekOfCode": "classes = {\n      0:'sem máscara',\n      1:'com máscara'\n  }\nprint(f\"classe: {classes[prediction]}\")",
+        "detail": "predict",
+        "documentation": {}
+    }
+]
