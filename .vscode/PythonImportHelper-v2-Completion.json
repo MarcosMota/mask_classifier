@@ -60,28 +60,28 @@
     {
         "label": "predict",
         "kind": 2,
-        "importPath": "app",
-        "description": "app",
+        "importPath": "api",
+        "description": "api",
         "peekOfCode": "def predict():\n    file = request.files['image']\n    image = Image.open(file.stream)\n    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n    #image = Image.open('test/1/1.jpeg')\n    size = (224, 224)\n    image = ImageOps.fit(image, size, Image.ANTIALIAS)\n    image_array = np.asarray(image)\n    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1\n    data[0] = normalized_image_array",
-        "detail": "app",
+        "detail": "api",
         "documentation": {}
     },
     {
         "label": "app",
         "kind": 5,
-        "importPath": "app",
-        "description": "app",
+        "importPath": "api",
+        "description": "api",
         "peekOfCode": "app = Flask(__name__)\nmodel = tf.keras.models.load_model('models/keras_model.h5')\n@app.route('/api/predict/', methods=['POST'])\ndef predict():\n    file = request.files['image']\n    image = Image.open(file.stream)\n    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n    #image = Image.open('test/1/1.jpeg')\n    size = (224, 224)\n    image = ImageOps.fit(image, size, Image.ANTIALIAS)",
-        "detail": "app",
+        "detail": "api",
         "documentation": {}
     },
     {
         "label": "model",
         "kind": 5,
-        "importPath": "app",
-        "description": "app",
+        "importPath": "api",
+        "description": "api",
         "peekOfCode": "model = tf.keras.models.load_model('models/keras_model.h5')\n@app.route('/api/predict/', methods=['POST'])\ndef predict():\n    file = request.files['image']\n    image = Image.open(file.stream)\n    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n    #image = Image.open('test/1/1.jpeg')\n    size = (224, 224)\n    image = ImageOps.fit(image, size, Image.ANTIALIAS)\n    image_array = np.asarray(image)",
-        "detail": "app",
+        "detail": "api",
         "documentation": {}
     }
 ]
