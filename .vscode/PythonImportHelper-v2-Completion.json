@@ -58,6 +58,33 @@
         "documentation": {}
     },
     {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
         "label": "predict",
         "kind": 2,
         "importPath": "api",
@@ -82,6 +109,69 @@
         "description": "api",
         "peekOfCode": "model = tf.keras.models.load_model('models/keras_model.h5')\n@app.route('/api/predict/', methods=['POST'])\ndef predict():\n    file = request.files['image']\n    image = Image.open(file.stream)\n    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)\n    #image = Image.open('test/1/1.jpeg')\n    size = (224, 224)\n    image = ImageOps.fit(image, size, Image.ANTIALIAS)\n    image_array = np.asarray(image)",
         "detail": "api",
+        "documentation": {}
+    },
+    {
+        "label": "carregar_modelo",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "classificar",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara\n    \"\"\"\n    # Realiza o preprocessamento\n    img_resize = tf.image.resize(img, [160, 160])\n    img_processada  = preprocess_input(img_resize)\n    img_processada = tf.expand_dims(img_processada, 0)\n    # Realiza as predições\n    modelo = carregar_modelo()",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def main():\n    st.header('Com máscara ou sem máscara')\n    opcoes = [OPCAO_IMAGEM, OPCAO_VIDEO]\n    escolha = st.radio('Qual modo você gostaria?', opcoes)\n    if escolha == OPCAO_IMAGEM:\n        file = st.file_uploader('Carregue alguma imagem aqui', type=['jpg', 'png', 'jpeg'])\n        if file is not None:\n            img = file.read() # Lê a imagem realizada do upload\n            img = tf.image.decode_image(img, channels=3).numpy() # Codifica de byte a imagem\n            st.image(img) # Mostra a imagem na tela",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "preprocess_input",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "preprocess_input = tf.keras.applications.resnet50.preprocess_input\nNOME_MODELO = 'mask_model.h5'\nOPCAO_VIDEO = 'Video'\nOPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "NOME_MODELO",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "NOME_MODELO = 'mask_model.h5'\nOPCAO_VIDEO = 'Video'\nOPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "OPCAO_VIDEO",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "OPCAO_VIDEO = 'Video'\nOPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "OPCAO_IMAGEM",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "OPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):\n    \"\"\" ",
+        "detail": "app",
         "documentation": {}
     }
 ]
