@@ -116,7 +116,7 @@
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara",
+        "peekOfCode": "def carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\n# Realiza as predições\nmodelo = carregar_modelo()\ndef classificar(img):",
         "detail": "app",
         "documentation": {}
     },
@@ -125,7 +125,7 @@
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara\n    \"\"\"\n    # Realiza o preprocessamento\n    img_resize = tf.image.resize(img, [160, 160])\n    img_processada  = preprocess_input(img_resize)\n    img_processada = tf.expand_dims(img_processada, 0)\n    # Realiza as predições\n    modelo = carregar_modelo()",
+        "peekOfCode": "def classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara\n    \"\"\"\n    # Realiza o preprocessamento\n    img_resize = tf.image.resize(img, [160, 160])\n    img_processada  = preprocess_input(img_resize)\n    img_processada = tf.expand_dims(img_processada, 0)\n    previsoes = modelo.predict(img_processada)\n    previsoes = tf.nn.sigmoid(previsoes)",
         "detail": "app",
         "documentation": {}
     },
@@ -161,7 +161,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "OPCAO_VIDEO = 'Video'\nOPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):",
+        "peekOfCode": "OPCAO_VIDEO = 'Video'\nOPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\n# Realiza as predições",
         "detail": "app",
         "documentation": {}
     },
@@ -170,7 +170,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "OPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\ndef classificar(img):\n    \"\"\" ",
+        "peekOfCode": "OPCAO_IMAGEM = 'Image'\ndef carregar_modelo():\n    \"\"\"\n        Carrega o modelo a partir do caminho models/mask_model.h5\n    \"\"\"\n    caminho = os.path.join('models', NOME_MODELO)\n    modelo = tf.keras.models.load_model(caminho)\n    return modelo\n# Realiza as predições\nmodelo = carregar_modelo()",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "modelo",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "modelo = carregar_modelo()\ndef classificar(img):\n    \"\"\" \n        Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara\n    \"\"\"\n    # Realiza o preprocessamento\n    img_resize = tf.image.resize(img, [160, 160])\n    img_processada  = preprocess_input(img_resize)\n    img_processada = tf.expand_dims(img_processada, 0)\n    previsoes = modelo.predict(img_processada)",
         "detail": "app",
         "documentation": {}
     }

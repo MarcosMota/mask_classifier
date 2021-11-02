@@ -20,6 +20,10 @@ def carregar_modelo():
     modelo = tf.keras.models.load_model(caminho)
     return modelo
 
+# Realiza as predições
+modelo = carregar_modelo()
+
+
 def classificar(img):
     """ 
         Classifica uma imagem retornando 1 - com máscara e 0 - sem máscara
@@ -29,8 +33,7 @@ def classificar(img):
     img_processada  = preprocess_input(img_resize)
     img_processada = tf.expand_dims(img_processada, 0)
     
-    # Realiza as predições
-    modelo = carregar_modelo()
+ 
     previsoes = modelo.predict(img_processada)
     previsoes = tf.nn.sigmoid(previsoes)
 
@@ -71,8 +74,10 @@ def main():
 
             resultado = classificar(frame)
             if resultado == 1:
+                cv2.putText(frame, 'Esta com mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (0,225,0))
                 placeholder.text("Está com máscara.")
             else:
+                cv2.putText(frame, 'Esta sem mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (255,0,0))
                 placeholder.text("Está sem máscara.")
             
             framewindow.image(frame)
