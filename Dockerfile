@@ -1,12 +1,15 @@
-FROM jjanzic/docker-python3-opencv
+FROM python:3.9
+
+RUN apt-get update && apt-get install -y python3-opencv
+RUN pip install opencv-python
 
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
 
+
 RUN pip install -r requirements.txt
-RUN pip install opencv-python
-RUN apt-get install libgl
+
 
 EXPOSE 8501
 
