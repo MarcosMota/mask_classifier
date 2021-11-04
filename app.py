@@ -69,18 +69,19 @@ def main():
         while escolha == OPCAO_VIDEO :
             _, frame = camera.read()
 
-            frame  = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame = cv2.flip(frame, 1)
+            if frame is not None :
+                frame  = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                frame = cv2.flip(frame, 1)
 
-            resultado = classificar(frame)
-            if resultado == 1:
-                cv2.putText(frame, 'Esta com mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (0,225,0))
-                placeholder.text("Está com máscara.")
-            else:
-                cv2.putText(frame, 'Esta sem mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (255,0,0))
-                placeholder.text("Está sem máscara.")
-            
-            framewindow.image(frame)
+                resultado = classificar(frame)
+                if resultado == 1:
+                    cv2.putText(frame, 'Esta com mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (0,225,0))
+                    placeholder.text("Está com máscara.")
+                else:
+                    cv2.putText(frame, 'Esta sem mascara.', (100,350), fontFace = cv2.FONT_HERSHEY_DUPLEX, fontScale= 1.5, color = (255,0,0))
+                    placeholder.text("Está sem máscara.")
+                
+                framewindow.image(frame)
 
 
 
